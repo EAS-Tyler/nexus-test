@@ -48,16 +48,26 @@ pipeline {
         //     // sh 'docker compose up' ???  get compose to pull image here
         //     }
         // }
+        // stage('Deploy') {
+        //     steps {
+        //         sshagent(credentials : ['ssh_agent']) {
+        //             sh '''ssh root@172.16.5.7 << 'EOF'
+        //                   cat yo
+        //                   EOF
+        //                   '''
+        //         // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
+        //         // sh 'ssh -v user@hostname.com'
+        //         // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+        //         }
+        //     }
+        // }
         stage('Deploy') {
             steps {
-                sshagent(credentials : ['ssh_agent']) {
+                sshagent(credentials: ['ssh_agent']) {
                     sh '''ssh root@172.16.5.7 << 'EOF'
-                          cat yo
-                          EOF
-                          '''
-                // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
-                // sh 'ssh -v user@hostname.com'
-                // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+cat yo
+EOF
+'''
                 }
             }
         }
