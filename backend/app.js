@@ -11,8 +11,8 @@ app.get('/', (req, res) => {
 })
 
 
-module.exports = response
-module.exports = app
+module.exports.response = response
+module.exports.app = app
 
 
 // set up sonarcube in own vm
