@@ -6,7 +6,7 @@ app.use(express.json())
 // cross origin? headers? allow methods?
 
 app.get('/', (req, res) => {
-    res.send('nice1')
+    res.send('nice one dude')
 })
 
 // app.post('/', (req, res) => {
