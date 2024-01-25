@@ -24,43 +24,12 @@ pipeline {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
-        // pull image
         stage('Push') {
             steps {
                 echo 'Pushing...'
-                // push new image after code change
                 sh 'docker push eastyler/jenkins_learn2:web'
             }
         }
-        //    stage('Pull') {
-        //     steps {
-        //         echo 'Pulling docker image...'
-        //         sh 'docker pull eastyler/jenkins_learn2:web'
-        //     }
-        // }
-        // stage('Deploy') {
-        //     steps {
-        //         echo 'Deploying...'
-        //         sh '''ssh root@172.16.5.7
-        //               docker pull eastyler/jenkins_learn2:web
-        //               docker run eastyler/jenkins-learn2:web
-        //               '''
-        //     // sh 'docker compose up' ???  get compose to pull image here
-        //     }
-        // }
-        // stage('Deploy') {
-        //     steps {
-        //         sshagent(credentials : ['ssh_agent']) {
-        //             sh '''ssh root@172.16.5.7 << 'EOF'
-        //                   cat yo
-        //                   EOF
-        //                   '''
-        //         // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
-        //         // sh 'ssh -v user@hostname.com'
-        //         // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
-        //         }
-        //     }
-        // }
         stage('Deploy') {
             steps {
                 sshagent(credentials: ['ssh_agent']) {
