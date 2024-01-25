@@ -1,19 +1,19 @@
 const express = require('express')
 const app = express()
-const port = 4000
 
-app.use(express.json())
-// cross origin? headers? allow methods?
 
+function response(x, y) {
+    return x + y
+    }
+    
 app.get('/', (req, res) => {
-    res.send('nice one')
+    res.json(response(4, 3))
 })
 
-// app.post('/', (req, res) => {
-//     res.send(`your ${req.body.thing1} is crazy ${req.body.thing2}`)
-// }
-// )
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
-})
+module.exports = response
+module.exports = app
+
+
+// set up sonarcube in own vm
+
