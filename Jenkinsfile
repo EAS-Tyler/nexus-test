@@ -67,6 +67,7 @@ pipeline {
                     sh '''ssh root@172.16.5.7 << 'EOF'
                           docker compose down
                           docker compose up
+                          exit
 EOF
                           '''
                 }
