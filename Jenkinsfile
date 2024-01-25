@@ -65,7 +65,8 @@ pipeline {
             steps {
                 sshagent(credentials: ['ssh_agent']) {
                     sh '''ssh root@172.16.5.7 << 'EOF'
-                          docker run eastyler/jenkins-learn2:web
+                          docker compose down
+                          docker compose up
 EOF
                           '''
                 }
