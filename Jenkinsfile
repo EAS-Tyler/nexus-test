@@ -53,7 +53,7 @@ pipeline {
                 sshagent(credentials : ['ssh_agent']) {
                     // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
                     sh 'ssh root@172.16.5.7'
-                    sh 'touch helloooo'
+                    sh 'cat yo'
                 // sh 'ssh -v user@hostname.com'
                 // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
                 }
