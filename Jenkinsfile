@@ -38,14 +38,24 @@ pipeline {
         //         sh 'docker pull eastyler/jenkins_learn2:web'
         //     }
         // }
+        // stage('Deploy') {
+        //     steps {
+        //         echo 'Deploying...'
+        //         sh '''ssh root@172.16.5.7
+        //               docker pull eastyler/jenkins_learn2:web
+        //               docker run eastyler/jenkins-learn2:web
+        //               '''
+        //     // sh 'docker compose up' ???  get compose to pull image here
+        //     }
+        // }
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
-                sh '''ssh root@172.16.5.7
-                      docker pull eastyler/jenkins_learn2:web
-                      docker run eastyler/jenkins-learn2:web
-                      '''
-            // sh 'docker compose up' ???  get compose to pull image here
+                sshagent(credentials : ['ssh_agent']) {
+                    sh 'ssh root@172.16.5.7'
+                    // sh 'ssh -o StrictHostKeyChecking=no user@hostname.com uptime'
+                    // sh 'ssh -v user@hostname.com'
+                    // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
+                }
             }
         }
     }
