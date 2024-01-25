@@ -65,9 +65,9 @@ pipeline {
             steps {
                 sshagent(credentials: ['ssh_agent']) {
                     sh '''ssh root@172.16.5.7 << 'EOF'
-  cat yo
+                          cat yo
 EOF
- '''
+                          '''
                 }
             }
         }
