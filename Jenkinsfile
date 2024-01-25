@@ -4,14 +4,14 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('eastyler-dockerhub')
     }
     stages {
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing...'
-        //         sh '''cd ./backend
-        //               npm install
-        //               npm test'''
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh '''cd ./backend
+                      npm install
+                      npm test'''
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building docker image'
