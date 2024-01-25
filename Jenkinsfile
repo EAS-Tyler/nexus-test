@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building docker image'
-                sh 'docker build -t eastyler/jenkins-learn2:web .'
+                sh 'docker build -t eastyler/jenkins_learn2:web .'
             }
         }
         stage('Login') {
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Pushing...'
                 // push new image after code change
-                sh 'docker push eastyler/jenkins-learn2:web'
+                sh 'docker push eastyler/jenkins_learn2:web'
             }
         }
         //    stage('Pull') {
