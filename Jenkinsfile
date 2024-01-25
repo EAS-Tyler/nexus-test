@@ -32,6 +32,13 @@ pipeline {
                 sh 'docker push eastyler/jenkins-learn2:web'
             }
         }
+         stage('test') {
+            steps {
+                echo 'testing...'
+                // push new image after code change
+                sh 'ping 172.16.5.7'
+            }
+        }
         //    stage('Pull') {
         //     steps {
         //         echo 'Pulling docker image...'
@@ -53,7 +60,6 @@ pipeline {
                 sshagent(credentials : ['ssh_agent']) {
                     sh '''ssh root@172.16.5.7
                           cat yo
-                          EOF
                           '''
                  // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
                 // sh 'ssh -v user@hostname.com'
