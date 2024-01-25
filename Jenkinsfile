@@ -51,8 +51,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(credentials : ['ssh_agent']) {
-                    sh '''ssh -v root@172.16.5.7
+                    sh '''ssh root@172.16.5.7 << 'EOF'
                           cat yo
+                          EOF
                           '''
                 // sh 'ssh -o StrictHostKeyChecking=no root@172.16.5.7 uptime'
                 // sh 'ssh -v user@hostname.com'
