@@ -12,20 +12,16 @@ pipeline {
                       npm test'''
             }
         }
-        // stage('SonarQube Analysis') {
-        //     def scannerHome = tool 'SonarScanner'
+        // stage('SonarQube Scan') {
+        //     // def scannerHome = tool 'SonarScanner'
         //     withSonarQubeEnv() {
         //         sh "${scannerHome}/bin/sonar-scanner"
         //     }
         // }
-        node {
-            stage('SCM') {
-                checkout scm
-            }
-            stage('SonarQube Analysis') {
-                def scannerHome = tool 'SonarScanner'
-                withSonarQubeEnv() {
-                    sh "${scannerHome}/bin/sonar-scanner"
+        stage('Scan') {
+            steps {
+                withSonarQubeEnv(installationName: 'server-sonar') {
+                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                 }
             }
         }
