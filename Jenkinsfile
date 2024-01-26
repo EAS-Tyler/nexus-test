@@ -14,11 +14,12 @@ pipeline {
         }
         //from sonarcube
         stage('SonarQube Scan') {
-            def scannerHome = tool 'SonarScanner'
-            withSonarQubeEnv('server-sonar') {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
-        }
+            steps {
+                def scannerHome = tool 'SonarScanner'
+                withSonarQubeEnv('server-sonar') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+        }}
         // stage('Scan') {
         //     steps {
         //         withSonarQubeEnv(installationName: 'server-sonar') {
@@ -59,10 +60,10 @@ EOF
                 }
             }
         }
-    }
+        }
     post {
         always {
             sh 'docker logout'
         }
     }
-}
+    }
