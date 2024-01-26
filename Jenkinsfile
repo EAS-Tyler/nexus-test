@@ -21,7 +21,10 @@ pipeline {
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'server-sonar') {
-                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                    // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                    // do i need to exec -it int container?
+
+
                 }
             }
         }
