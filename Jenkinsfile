@@ -12,22 +12,22 @@ pipeline {
                       npm test'''
             }
         }
-        // stage('SonarQube Scan') {
-        //     // def scannerHome = tool 'SonarScanner'
-        //     withSonarQubeEnv() {
-        //         sh "${scannerHome}/bin/sonar-scanner"
-        //     }
-        // }
-        stage('Scan') {
-            steps {
-                withSonarQubeEnv(installationName: 'server-sonar') {
-                    // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-                    // do i need to exec -it int container?
-
-
-                }
+        //from sonarcube
+        stage('SonarQube Scan') {
+            def scannerHome = tool 'SonarScanner'
+            withSonarQubeEnv('server-sonar') {
+                sh "${scannerHome}/bin/sonar-scanner"
             }
         }
+        // stage('Scan') {
+        //     steps {
+        //         withSonarQubeEnv(installationName: 'server-sonar') {
+        //             //   sh '/var/lib/jenkins/sonar-scanner-4.6.0.2311-linux/bin/sonar-scanner \ '
+        //             // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+        //             // do i need to exec -it int container?
+        //         }
+        //     }
+        // }
         stage('Build') {
             steps {
                 echo 'Building docker image'
