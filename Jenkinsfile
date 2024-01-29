@@ -27,14 +27,9 @@ pipeline {
                     def scannerHome = tool 'SonarScanner'
                     //select sonarqube serevr i want to interact with
                     withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
-                        println "${env.SONAR_HOST_URL}"
+                        // println "${env.SONAR_HOST_URL}"
                         sh "${scannerHome}/bin/sonar-scanner"
-                    // sh ' '
-                    //   sh '/var/lib/jenkins/sonar-scanner-4.6.0.2311-linux/bin/sonar-scanner \ '
-                    // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-                    // do i need to exec -it int container?
                     }
-                // }
             }
         }
         }
