@@ -14,11 +14,13 @@ pipeline {
         }
         stage('Scan') {
             steps {
+                script{
                     def scannerHome = tool 'SonarScanner'
                     //selecting sonarqube server i want to interact with
                     withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
+                }
         }
         }
         stage('Build') {
