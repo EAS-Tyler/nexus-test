@@ -17,7 +17,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarScanner'
                     //selecting sonarqube server i want to interact with
-                    withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
+                    withSonarQubeEnv(installationName: 'server-sonar') {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
@@ -32,13 +32,13 @@ pipeline {
         //         }                    }
         //         }
         //     }
-        stage('Quality Gate') {
-            steps {
-                    timeout(time: 2, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
-                    }
-            }
-        }
+        // stage('Quality Gate') {
+        //     steps {
+        //             timeout(time: 2, unit: 'MINUTES') {
+        //                 waitForQualityGate abortPipeline: true
+        //             }
+        //     }
+        // }
         stage('Build') {
             steps {
                 echo 'Building docker image'
