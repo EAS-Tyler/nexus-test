@@ -14,6 +14,12 @@ function testin() {
     return "bacon"
 }
 
+function testin() {
+    return "bacon"
+}
+
+
+
 
 module.exports.response = response
 module.exports.app = app
