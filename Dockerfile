@@ -1,5 +1,4 @@
 FROM node:21
-# nginx?
 
 COPY ./backend . 
 

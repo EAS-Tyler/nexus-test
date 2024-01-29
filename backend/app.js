@@ -10,15 +10,14 @@ app.get('/', (req, res) => {
     res.json(response(4, 3))
 })
 
-console.log('smell')
-console.log('smell')
-console.log('smell')
-
+function testin() {
+    return "bacon"
+}
 
 
 module.exports.response = response
 module.exports.app = app
-
+module.exports.testin = testin
 
 // set up sonarcube in own vm
 
