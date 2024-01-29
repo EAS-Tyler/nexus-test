@@ -10,7 +10,27 @@ app.get('/', (req, res) => {
     res.json(response(4, 3))
 })
 
-app._router.(()) = function
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+console.log('smell')
+
 
 module.exports.response = response
 module.exports.app = app
