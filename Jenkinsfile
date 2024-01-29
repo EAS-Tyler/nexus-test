@@ -12,25 +12,13 @@ pipeline {
                       npm test'''
             }
         }
-        //from sonarcube
-        // stage('SonarQube Scan') {
-        //     steps {
-        //         def scannerHome = tool 'SonarScanner'
-        //         withSonarQubeEnv('server-sonar') {
-        //             sh "${scannerHome}/bin/sonar-scanner"
-        //         }
-        // }}
-        // my stage
         stage('Scan') {
             steps {
-                script {
                     def scannerHome = tool 'SonarScanner'
-                    //select sonarqube serevr i want to interact with
+                    //selecting sonarqube server i want to interact with
                     withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
-                        // println "${env.SONAR_HOST_URL}"
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
-            }
         }
         }
         stage('Build') {
