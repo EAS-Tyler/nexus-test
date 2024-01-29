@@ -25,12 +25,13 @@ pipeline {
         }
         stage('Quality Gate') {
             steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
+                    timeout(time: 2, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                 // timeout, to pause pipeline and continue if code is clean or abort if not (webhook from sonar)
+                }                    }
                 }
             }
-        }
         stage('Build') {
             steps {
                 echo 'Building docker image'
@@ -62,10 +63,10 @@ EOF
                 }
             }
         }
-    }
+        }
     post {
         always {
             sh 'docker logout'
         }
     }
-}
+    }
