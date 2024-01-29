@@ -21,33 +21,22 @@ pipeline {
         //         }
         // }}
         // my stage
-        // stage('Scan') {
-        //     steps {
-        //         script {
-        //             // def scannerHome = tool 'SonarScanner 4.0'
-        //             //select sonarqube serevr i want to interact with
-        //             withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
-        //                 println "${env.SONAR_HOST_URL}"
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             // sh ' '
-        //             //   sh '/var/lib/jenkins/sonar-scanner-4.6.0.2311-linux/bin/sonar-scanner \ '
-        //             // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-        //             // do i need to exec -it int container?
-        //             }
-        //         // }
-        //     }
-        // }
-        stage('SonarQube analysis') {
+        stage('Scan') {
             steps {
                 script {
-                    def scannerHome = tool 'sonarscan'
-                    withSonarQubeEnv('server-sonar') {
-                        sh "${tool('sonarscan')}/bin/sonar-scanner \
-                    -Dsonar.projectKey=reactapp \
-                    -Dsonar.projectName=reactapp"
+                    def scannerHome = tool 'SonarScanner'
+                    //select sonarqube serevr i want to interact with
+                    withSonarQubeEnv(installationName: 'server-sonar', envOnly: true) {
+                        println "${env.SONAR_HOST_URL}"
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    // sh ' '
+                    //   sh '/var/lib/jenkins/sonar-scanner-4.6.0.2311-linux/bin/sonar-scanner \ '
+                    // sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                    // do i need to exec -it int container?
                     }
-                }
+                // }
             }
+        }
         }
         stage('Build') {
             steps {
