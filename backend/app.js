@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
     res.json(response(4, 3))
 })
 
+app._router.(()) = function
 
 module.exports.response = response
 module.exports.app = app
