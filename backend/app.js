@@ -13,23 +13,7 @@ app.get('/', (req, res) => {
 console.log('smell')
 console.log('smell')
 console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
-console.log('smell')
+
 
 
 module.exports.response = response
