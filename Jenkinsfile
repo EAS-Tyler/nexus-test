@@ -23,7 +23,6 @@ pipeline {
         stage('Scan') {
             steps {
                     // def scannerHome = tool 'SonarScanner 4.0'
-                       const scannerHome = tool 'SonarScanner 4.0'
                 //select sonarqube serevr i want to interact with
                 withSonarQubeEnv(installationName: 'server-sonar') {
                     // println "${env.SONAR_HOST_URL}"
