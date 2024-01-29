@@ -39,6 +39,11 @@ pipeline {
         //             }
         //     }
         // }
+        stage('Quality Gate') {
+            steps {
+                        waitForQualityGate abortPipeline: true
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building docker image'
