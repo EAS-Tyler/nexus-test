@@ -1,7 +1,14 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('eastyler-dockerhub')
+        // DOCKERHUB_CREDENTIALS = credentials('eastyler-dockerhub')
+        // NEXUS_VERSION = 'nexus3'
+        // NEXUS_PROTOCOL = 'http'
+        // NEXUS_URL = 'http://172.16.5.13:8081/'
+        // NEXUS_REPOSITORUY = 'docker-nexus-hosted'
+        // NEXUS_CREDENTIAL_ID = 'nexus-user-credentials'
+        NEXUS_CREDS = credentials('nexus-user-credentials')
+        NEXUS_DOCKER_REPO = '172.16.5.13:8082'
     }
     stages {
     //     stage('Test') {
@@ -33,20 +40,34 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building docker image'
-                sh 'docker build -t eastyler/jenkins_learn2:web .'
+                sh 'docker build -t $NEXUS_DOCKER_REPO/myapp:$BUILD_NUMBER .'
             }
         }
         // log in to nexus, pul from nexus
-        // stage('Login') {
-        //     steps {
-        //         echo 'Logging in...'
-        //         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        //     }
-        // }
+        stage('Login') {
+            steps {
+                echo 'Logging in... nexus docker repo'
+                // sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-user-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                        sh ' echo $PASS | docker login -u $USER --password-stdin $NEXUS_DOCKER_REPO'
+                    }
+                }
+            }
+        }
         stage('Push') {
             steps {
-                echo 'Pushing...'
-                sh 'docker push http://172.16.5.13:8081/repository/docker-nexus-hosted/eastyler/jenkins_learn2:web'
+                script {
+                    echo 'Pushing...'
+                    sh 'docker push $NEXUS_DOCKER_REPO/myapp:$BUILD_NUMBER'
+                // nexusArtifactUploader(
+                //     nexusVersion: NEXUS_VERSION
+                //     protocol: NEXUS_PROTOCOL
+                //     nexusUrl: NEXUS_URL
+                //     repository: NEXUS_REPOSITORUY
+                //     credentialsId: NEXUS_CREDENTIAL_ID
+                // )
+                }
             }
         }
 //         stage('Deploy') {
@@ -67,5 +88,5 @@ pipeline {
 //         always {
 //             sh 'docker logout'
 //         }
-    }
+}
 }
