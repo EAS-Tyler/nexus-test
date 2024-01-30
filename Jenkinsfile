@@ -8,7 +8,7 @@ pipeline {
         // NEXUS_REPOSITORUY = 'docker-nexus-hosted'
         // NEXUS_CREDENTIAL_ID = 'nexus-user-credentials'
         NEXUS_CREDS = credentials('nexus-user-credentials')
-        NEXUS_DOCKER_REPO = 'https://172.16.5.13:8083/'
+        NEXUS_DOCKER_REPO = 'https://172.16.5.13:8083'
     }
     stages {
     //     stage('Test') {
