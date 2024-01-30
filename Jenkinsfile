@@ -46,7 +46,7 @@ pipeline {
         stage('Push') {
             steps {
                 echo 'Pushing...'
-                sh 'docker push http://172.16.5.13:8081/repository/docker-nexus-hosted/'
+                sh 'docker push http://172.16.5.13:8081/repository/docker-nexus-hosted/eastyler/jenkins_learn2:web'
             }
         }
 //         stage('Deploy') {
