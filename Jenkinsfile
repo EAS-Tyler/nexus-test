@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('eastyler-dockerhub')
     }
-    // stages {
+    stages {
     //     stage('Test') {
     //         steps {
     //             echo 'Testing...'
@@ -67,5 +67,5 @@ pipeline {
 //         always {
 //             sh 'docker logout'
 //         }
-//     }
+    }
 }
