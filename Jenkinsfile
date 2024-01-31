@@ -68,7 +68,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(credentials: ['ssh_agent']) {
-                    sh 'ssh root@172.16.5.14'
+                    sh 'ssh root@172.16.5.15'
                 }
             }
         }
