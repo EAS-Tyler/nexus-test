@@ -5,14 +5,14 @@ pipeline {
         NEXUS_DOCKER_REPO = '172.16.5.13:8082'
     }
     stages {
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing...'
-        //         sh '''cd ./backend
-        //               npm install
-        //               npm test'''
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh '''cd ./backend
+                      npm install
+                      npm test'''
+            }
+        }
         // stage('Scan') {
         //     steps {
         //         script {
@@ -34,6 +34,7 @@ pipeline {
                 sh 'docker build -t 172.16.5.13:8082/myapp:works .'
             }
         }
+        // login not needed? allow anonymous pul request? online (If checked, the repository accepts incoming requests)?
         // stage('Login') {
         //     steps {
         //         echo 'Logging in... nexus docker repo'
