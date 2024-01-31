@@ -57,6 +57,7 @@ pipeline {
                         sshagent(credentials: ['ssh_agent']) {
                             sh '''ssh root@172.16.5.16 << 'EOF'
                                   docker compose down
+                                  docker pull 172.16.5.13:8082/myapp:works
                                   docker compose up -d
                                   exit
         EOF
