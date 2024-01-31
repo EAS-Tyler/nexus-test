@@ -28,12 +28,12 @@ pipeline {
         //                 waitForQualityGate abortPipeline: true
         //     }
         // }
-        // stage('Build') {
-        //     steps {
-        //         echo 'Building docker image'
-        //         sh 'docker build -t 172.16.5.13:8082/myapp:works .'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                echo 'Building docker image'
+                sh 'docker build -t 172.16.5.13:8082/myapp:works .'
+            }
+        }
         // stage('Login') {
         //     steps {
         //         echo 'Logging in... nexus docker repo'
@@ -44,14 +44,14 @@ pipeline {
         //         }
         //     }
         // }
-        // stage('Push') {
-        //     steps {
-        //         script {
-        //             echo 'Pushing...'
-        //             sh 'docker push 172.16.5.13:8082/myapp:works'
-        //         }
-        //     }
-        // }
+        stage('Push') {
+            steps {
+                script {
+                    echo 'Pushing...'
+                    sh 'docker push 172.16.5.13:8082/myapp:works'
+                }
+            }
+        }
                 stage('Deploy') {
                     steps {
                         sshagent(credentials: ['ssh_agent']) {
@@ -65,27 +65,6 @@ pipeline {
                         }
                     }
                 }
-        //         stage('Deploy') {
-        //             steps {
-        //                 sshagent(credentials: ['ssh_agent']) {
-        //                     sh '''ssh root@172.16.5.14 << 'EOF'
-        //                           docker compose down
-        //                           docker pull 172.16.5.13:8082/myapp:works
-        //                           docker compose up -d
-        //                           exit
-        // EOF
-        //                           '''
-        //                 }
-        //             }
-        //         }
-        // stage('Deploy') {
-        //     steps {
-        //         sshagent(credentials: ['ssh_agent']) {
-        //             sh '''ssh root@172.16.5.16
-        //               '''
-        //         }
-        //     }
-        // }
     }
     post {
         always {
