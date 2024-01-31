@@ -52,6 +52,18 @@ pipeline {
         //         }
         //     }
         // }
+                stage('Deploy') {
+                    steps {
+                        sshagent(credentials: ['ssh_agent']) {
+                            sh '''ssh root@172.16.5.14 << 'EOF'
+                                  docker compose down
+                                  docker compose up -d
+                                  exit
+        EOF
+                                  '''
+                        }
+                    }
+                }
         //         stage('Deploy') {
         //             steps {
         //                 sshagent(credentials: ['ssh_agent']) {
@@ -65,13 +77,14 @@ pipeline {
         //                 }
         //             }
         //         }
-        stage('Deploy') {
-            steps {
-                sshagent(credentials: ['ssh_agent']) {
-                    sh 'ssh root@172.16.5.16'
-                }
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         sshagent(credentials: ['ssh_agent']) {
+        //             sh '''ssh root@172.16.5.16
+        //               '''
+        //         }
+        //     }
+        // }
     }
     post {
         always {
