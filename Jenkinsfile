@@ -41,7 +41,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building docker image'
-                sh 'docker build -t $NEXUS_DOCKER_REPO/myapp:$BUILD_NUMBER .'
+                sh 'docker build -t 172.16.5.13:8082/myapp:works .'
             }
         }
         // docker login -u admin -p dontbeshit 172.16.5.13:8082
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     echo 'Pushing...'
-                    sh 'docker push $NEXUS_DOCKER_REPO/myapp:$BUILD_NUMBER'
+                    sh 'docker push 172.16.5.13:8082/myapp:works'
                 // nexusArtifactUploader(
                 //     nexusVersion: NEXUS_VERSION
                 //     protocol: NEXUS_PROTOCOL
