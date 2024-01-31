@@ -8,7 +8,8 @@ pipeline {
         // NEXUS_REPOSITORUY = 'docker-nexus-hosted'
         // NEXUS_CREDENTIAL_ID = 'nexus-user-credentials'
         NEXUS_CREDS = credentials('nexus-user-credentials')
-        NEXUS_DOCKER_REPO = '172.16.5.13:8083'
+        // NEXUS_DOCKER_REPO = '172.16.5.13:8083'
+        NEXUS_DOCKER_REPO = '172.16.5.13:8082'
     }
     stages {
     //     stage('Test') {
@@ -43,6 +44,7 @@ pipeline {
                 sh 'docker build -t $NEXUS_DOCKER_REPO/myapp:$BUILD_NUMBER .'
             }
         }
+        // docker login -u admin -p dontbeshit 172.16.5.13:8082
         // log in to nexus, pul from nexus
         stage('Login') {
             steps {
