@@ -12,30 +12,30 @@ pipeline {
         NEXUS_DOCKER_REPO = '172.16.5.13:8082'
     }
     stages {
-    //     stage('Test') {
-    //         steps {
-    //             echo 'Testing...'
-    //             sh '''cd ./backend
-    //                   npm install
-    //                   npm test'''
-    //         }
-    //     }
-        // stage('Scan') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool 'SonarScanner'
-        //             //selecting sonarqube server i want to interact with
-        //             withSonarQubeEnv(installationName: 'server-sonar') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Quality Gate') {
-        //     steps {
-        //                 waitForQualityGate abortPipeline: true
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh '''cd ./backend
+                      npm install
+                      npm test'''
+            }
+        }
+        stage('Scan') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    //selecting sonarqube server i want to interact with
+                    withSonarQubeEnv(installationName: 'server-sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                        waitForQualityGate abortPipeline: true
+            }
+        }
 
         // repo url http://172.16.5.13:8081/repository/docker-nexus-hosted/
         stage('Build') {
