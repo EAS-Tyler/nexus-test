@@ -10,7 +10,6 @@ pipeline {
                 echo 'Testing...'
                 sh '''cd ./backend
                       npm install
-                      npm install lodash
                       npm test'''
             }
         }
