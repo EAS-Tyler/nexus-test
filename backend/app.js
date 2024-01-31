@@ -7,7 +7,7 @@ function response(x, y) {
     }
     
 app.get('/', (req, res) => {
-    res.json(response(4, 3))
+    res.json(response(4, 15))
 })
 
 function testin() {
