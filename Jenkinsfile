@@ -8,29 +8,26 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh '''npm config set registry http://172.16.5.13:8081/repository/npm-proxy/
-                cd ./backend
+                sh '''cd ./backend
                       npm install
-                      npm install react
-                      npm view jest
                       npm test'''
             }
         }
-        // stage('Scan') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool 'SonarScanner'
-        //             withSonarQubeEnv(installationName: 'server-sonar') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Quality Gate') {
-        //     steps {
-        //                 waitForQualityGate abortPipeline: true
-        //     }
-        // }
+        stage('Scan') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv(installationName: 'server-sonar') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                        waitForQualityGate abortPipeline: true
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building docker image'
