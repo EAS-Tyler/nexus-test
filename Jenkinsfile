@@ -11,6 +11,7 @@ pipeline {
                 sh '''npm config set registry http://172.16.5.13:8081/repository/npm-proxy/
                 cd ./backend
                       npm install
+                      npm view jest
                       npm test'''
             }
         }
